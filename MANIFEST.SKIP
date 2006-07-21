@@ -23,3 +23,4 @@ CVS/.*
 ^_build/
 t/up2date
 ^Bot-BasicBot
+bot-basicbot\.sqlite
