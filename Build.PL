@@ -6,7 +6,6 @@ my $build = Module::Build->new(
     license           => 'perl',
     dist_author       => q{Philippe "BooK" Bruhat <book@cpan.org>},
     dist_version_from => 'lib/Bot/BasicBot/Pluggable/Module/Assmble.pm',
-    dist_abstract => 'Regexp::Assemble plugin for Bot::BasicBot::Pluggable',
     requires      => {
         'Test::More'               => 0,
         'Bot::BasicBot::Pluggable' => '0.5',
