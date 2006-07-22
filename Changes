@@ -1,0 +1,7 @@
+Revision history for Bot-BasicBot-Pluggable-Module-Assemble
+
+0.01 Sun Jul 23 01:54:15 CEST 2006
+        - First version, to satisfy the urge of producing an optimised
+          regexp while fooling around on #perlfr
+        - 100% coverage
+
