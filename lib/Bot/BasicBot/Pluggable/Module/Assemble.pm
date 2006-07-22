@@ -20,11 +20,9 @@ sub told {
     # ignore people we ignore
     return if $bot->ignore_nick( $mess->{who} );
 
-    # only answer our command
-    # (no command needed if we're named after the command
-    return
-        if !( $mess->{body} =~ /^\s*assemble(.)(.*)/i
-        || $bot->nick() eq 'assemble' );
+    # only answer our command (which can be our name too)
+    my $src = $bot->nick() eq 'assemble' ? 'raw_body' : 'body';
+    return if $mess->{$src} !~ /^\s*assemble(.)(.*)/i;
 
     # compute the assembled regexp and return it
     my ( $delim, $args ) = ( $1, $2 );
