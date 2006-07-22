@@ -4,31 +4,32 @@ use strict;
 use Bot::BasicBot::Pluggable::Module;
 use Regexp::Assemble;
 
-use vars qw( @ISA );
-@ISA = qw(Bot::BasicBot::Pluggable::Module);
+use vars qw( @ISA $VERSION );
+@ISA     = qw(Bot::BasicBot::Pluggable::Module);
+$VERSION = '0.01';
 
 sub told {
     my ( $self, $mess ) = @_;
+    my $bot = $self->bot();
 
     # we must be directly addressed
     return
-        if !( $mess->{address} eq $self->nick()
+        if !( ( defined $mess->{address} && $mess->{address} eq $bot->nick() )
         || $mess->{channel} eq 'msg' );
 
     # ignore people we ignore
-    return if $self->bot()->ignore_nick( $mess->{who} );
+    return if $bot->ignore_nick( $mess->{who} );
 
     # only answer our command
     # (no command needed if we're named after the command
     return
         if !( $mess->{body} =~ /^\s*assemble(.)(.*)/i
-        || $self->nick() eq 'assemble' );
+        || $bot->nick() eq 'assemble' );
 
     # compute the assembled regexp and return it
     my ( $delim, $args ) = ( $1, $2 );
-    my $ra = Regexp::Assemble->new()
-        ->add( grep { $_ ne '' } split /$delim+/, $args );
-    return $ra->as_string();
+    return Regexp::Assemble->new()
+        ->add( grep { $_ ne '' } split /$delim+/, $args )->as_string();
 }
 
 sub help {'assemble regex1 regex2 regex3'}
