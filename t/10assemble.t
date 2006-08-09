@@ -87,6 +87,15 @@ my @tests = (
             '_nick'    => 'assemble',
         } => '(?:b(?:lonk|am)|zlonk)'
     ],
+    [   {   'body'     => 'zlonk',
+            'raw_nick' => 'BooK!~book@d83-179-185-40.cust.tele2.fr',
+            'who'      => 'BooK',
+            'address'  => 'assemble',
+            'channel'  => '#zlonkbam',
+            'raw_body' => 'assemble zlonk',
+            '_nick'    => 'assemble',
+        } => undef,
+    ],
 );
 
 plan tests => @tests + 1;
