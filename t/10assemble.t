@@ -96,6 +96,15 @@ my @tests = (
             '_nick'    => 'assemble',
         } => undef,
     ],
+    [   {   'body'     => 'assemble zlonk',
+            'raw_nick' => 'BooK!~book@d83-179-185-40.cust.tele2.fr',
+            'who'      => 'BooK',
+            'address'  => 'bam',
+            'channel'  => '#zlonkbam',
+            'raw_body' => 'bam: assemble zlonk',
+            '_nick'    => 'bam',
+        } => undef,
+    ],
 );
 
 plan tests => @tests + 1;
