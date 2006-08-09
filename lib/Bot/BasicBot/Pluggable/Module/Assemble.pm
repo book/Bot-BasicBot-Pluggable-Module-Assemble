@@ -6,7 +6,7 @@ use Regexp::Assemble;
 
 use vars qw( @ISA $VERSION );
 @ISA     = qw(Bot::BasicBot::Pluggable::Module);
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 sub told {
     my ( $self, $mess ) = @_;
@@ -20,14 +20,19 @@ sub told {
     # ignore people we ignore
     return if $bot->ignore_nick( $mess->{who} );
 
-    # only answer our command (which can be our name too)
+    # only answer to our command (which can be our name too)
     my $src = $bot->nick() eq 'assemble' ? 'raw_body' : 'body';
     return if $mess->{$src} !~ /^\s*assemble(.)(.*)/i;
 
-    # compute the assembled regexp and return it
+    # grab the parameter list
     my ( $delim, $args ) = ( $1, $2 );
-    return Regexp::Assemble->new()
-        ->add( grep { $_ ne '' } split /$delim+/, $args )->as_string();
+    my @args = grep { $_ ne '' } split /$delim+/, $args;
+
+    # ignore short lists
+    return if @args < 2;
+
+    # compute the assembled regexp and return it
+    return Regexp::Assemble->new()->add( @args )->as_string();
 }
 
 sub help {'assemble regex1 regex2 regex3'}
