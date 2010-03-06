@@ -6,7 +6,7 @@ use Regexp::Assemble;
 
 use vars qw( @ISA $VERSION );
 @ISA     = qw(Bot::BasicBot::Pluggable::Module);
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 sub told {
     my ( $self, $mess ) = @_;
@@ -26,7 +26,7 @@ sub told {
 
     # grab the parameter list
     my ( $delim, $args ) = ( $1, $2 );
-    my @args = grep { $_ ne '' } split /$delim+/, $args;
+    my @args = grep { $_ ne '' } split /\Q$delim\E+/, $args;
 
     # ignore short lists
     return if @args < 2;
@@ -79,7 +79,7 @@ to which the bot will reply:
 
 =head1 AUTHOR
 
-Philippe "BooK" Bruhat, C<< <book@cpan.org> >>
+Philippe Bruhat (BooK), C<< <book@cpan.org> >>
 
 =head1 BUGS
 
@@ -91,7 +91,7 @@ make changes.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2006 Philippe "BooK" Bruhat, All Rights Reserved.
+Copyright 2006-2010 Philippe Bruhat (BooK), All Rights Reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
